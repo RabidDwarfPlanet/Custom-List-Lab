@@ -16,9 +16,19 @@ namespace CustomList
         //Constructor
         public CustomList()
         {
-            //capacity = 
-            //count =
-            //items = 
+            capacity = 4;
+            count = 0;
+            items = new T[capacity];
+        }
+
+        public int Count { get => count; }
+        public int Capacity { get => capacity; }
+
+        public T this[int index]
+        {
+            get => items[index];
+            set => items[index] = value;
+
         }
 
         //Member Methods (CAN DO)
@@ -27,6 +37,20 @@ namespace CustomList
             //'item' parameter should be added to internal 'items' array
             //if items array is at capacity, double capacity and create new array
             //transfer all items to new array
+            if (count == capacity) 
+            {
+                capacity *= 2;
+                T[]doubledItems = new T[capacity];
+                int i = 0;
+                foreach (T transferItem in items)
+                {
+                    doubledItems[i] = transferItem;
+                    i++;
+                }
+                items = doubledItems;
+            }
+            items[count] = item;
+            count++;
         }
 
         public bool Remove(T item)
