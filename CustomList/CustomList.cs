@@ -58,6 +58,19 @@ namespace CustomList
             //If 'item' exists in the 'items' array, remove its first instance
             //Any items coming after the removed item should be shifted down so there is no empty index.
             //If 'item' was removed, return true. If no item was removed, return false.
+            for(int i = 0; i < count; i++)
+            {
+                if (EqualityComparer<T>.Default.Equals(item, items[i]))
+                {
+                    for (int j = i; j < count; j++)
+                    {
+                        if(j == Capacity - 1) { items[j] = default(T); }
+                        else { items[j] = items[j + 1]; }
+                    }
+                    count--;
+                    return true;
+                }     
+            }
             return false;
         }
 
