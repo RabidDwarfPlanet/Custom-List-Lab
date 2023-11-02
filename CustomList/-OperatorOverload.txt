@@ -1,0 +1,29 @@
+CustomList<T> - Operator Overload
+
+Definition
+Removes the each occurrence of a specific object in the second CustomList<T> from the first CustomList<T>.
+
+public static CustomList<T> operator -(CustomList<T> firstList, CustomList<T> secondList)
+
+
+Parameters
+Class CustomList firstList
+The base list to remove items found in the secondList from.
+
+Class CustomList secondList
+The list of items that will be removed from the firstList if those items are found.
+
+
+Returns
+Class CustomList reducedList
+A new list with all the common items from the secondList removed from the firstList
+
+
+Examples
+CustomList<int> firstList = new CustomList<int>() {1,2,3};
+CustomList<int> secondList = new CustomList<int>() {5,1,4}; 
+CustomList<int> reducedList = firstList - secondList; 
+reducedList result is { 5,4 }
+
+
+
