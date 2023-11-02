@@ -134,6 +134,29 @@ namespace CustomList
             return reducedList;
         }
 
+        public void Zip(CustomList<T> list)
+        {
+            CustomList<T> zippedList = new CustomList<T>();
+            int i;
+            for (i = 0; i < Count; i++)
+            {
+                zippedList.Add(items[i]);
+                if (i < list.Count)
+                {
+                    zippedList.Add(list[i]);
+                }
+            }
+            if (i >= Count && list.Count > Count)
+            {
+                for(int j = i; j < list.Count; j++)
+                {
+                    zippedList.Add(list[j]);
+                }
+            }
 
+            count = zippedList.Count;
+            capacity = zippedList.Capacity;
+            items = zippedList.items;
+        }
     }
 }

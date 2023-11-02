@@ -3,7 +3,7 @@ using CustomList;
 namespace TestProject1
 {
     [TestClass]
-    public class UnitTest1
+    public class MinusOperatorTests
     {
         [TestMethod]
         public void MinusOperator_SecondListMinusFirstList_ToStringOutputsFirstListWithoutItemsInSecondList()

@@ -10,17 +10,11 @@
 
             //Act
             firstList.Add(1);
-            firstList.Add(2);
             firstList.Add(3);
-            firstList.Add(5);
-            firstList.Add(6);
-            secondList.Add(1);
-            secondList.Add(6);
-            secondList.Add(5);
-            CustomList<int> reducedList = firstList - secondList;
+            secondList.Add(2);
+            secondList.Add(4);
+            firstList.Zip(secondList);
 
-            //Assert
-            //Assert.AreEqual("2, 3", reducedList.ToString());
         }
     }
 }
