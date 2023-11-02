@@ -158,5 +158,48 @@ namespace CustomList
             capacity = zippedList.Capacity;
             items = zippedList.items;
         }
+
+        public bool Contains(T item) 
+        {
+            foreach(T obj in items)
+            {
+                if(EqualityComparer<T>.Default.Equals(obj, item))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public int IndexOf(T item)
+        {
+            for(int i = 0; i < count; i++)
+            {
+                if (EqualityComparer<T>.Default.Equals(item, items[i]))
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        public void TrimExcess()
+        {
+            if (capacity > 4)
+            {
+                if(count > 4) { capacity = count; }
+                else { capacity = 4; }
+            }
+
+        }
+
+        public void Clear()
+        {
+            items = new T[capacity];
+            count = 0;
+            TrimExcess();
+        }
+
+        //public void()
     }
 }
