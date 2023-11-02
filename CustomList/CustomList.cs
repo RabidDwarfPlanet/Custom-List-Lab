@@ -60,6 +60,7 @@ namespace CustomList
             //If 'item' was removed, return true. If no item was removed, return false.
             for(int i = 0; i < count; i++)
             {
+                
                 if (EqualityComparer<T>.Default.Equals(item, items[i]))
                 {
                     for (int j = i; j < count; j++)
@@ -76,14 +77,32 @@ namespace CustomList
 
         public override string ToString()
         {
+            bool first = true;
+            string list = "";
             //returns a single string that contains all items from array
-            return "";
+            for(int i = 0; i < Count; i++)
+            {
+                if (!first) { list += ", "; }
+                else { first = false; }
+                list += $"{items[i]}";
+            }
+            return list;
         }
 
         public static CustomList<T> operator +(CustomList<T> firstList, CustomList<T> secondList)
         {
+            CustomList<T> combinedList = new CustomList<T>();
+            for(int i = 0; i < firstList.Count; i++)
+            {
+                combinedList.Add(firstList[i]);
+            }
+            for(int i = 0; i < secondList.Count; i++)
+            {
+                combinedList.Add(secondList[i]);
+            }
+
             //returns a single CustomList<T> that contains all items from firstList and all items from secondList 
-            return null;
+            return combinedList;
         }
 
         public static CustomList<T> operator -(CustomList<T> firstList, CustomList<T> secondList)
