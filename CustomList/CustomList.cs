@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CustomList
 {
-    public class CustomList<T>
+    public class CustomList<T> : IEnumerable
     {
         //Member Variables (HAS A)
         private T[] items;
@@ -32,6 +33,13 @@ namespace CustomList
         }
 
         //Member Methods (CAN DO)
+        public IEnumerator GetEnumerator()
+        {
+            for (int i = 0; i < count; i++)
+            {
+                yield return items[i];
+            }
+        }
         public void Add(T item)
         {
             //'item' parameter should be added to internal 'items' array
@@ -41,11 +49,9 @@ namespace CustomList
             {
                 capacity *= 2;
                 T[]doubledItems = new T[capacity];
-                int i = 0;
-                foreach (T transferItem in items)
+                for (int i = 0; i < count; i++)
                 {
-                    doubledItems[i] = transferItem;
-                    i++;
+                    doubledItems[i] = items[i];
                 }
                 items = doubledItems;
             }
@@ -200,6 +206,30 @@ namespace CustomList
             TrimExcess();
         }
 
-        //public void()
+        public void Insert(int index, T item)
+        {
+            if(index < 0 || index > count)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            if (count == capacity)
+            {
+                capacity *= 2;
+                T[] doubledItems = new T[capacity];
+                for (int i = 0; i < count; i++)
+                {
+                    doubledItems[i] = items[i];
+                }
+                items = doubledItems;
+            }
+            T[] tempItems = new T[capacity];
+            tempItems = items;
+            for (int j = index; j < count; j++)
+            {
+                items[j + 1] = tempItems[j];
+            }
+            items[index] = item;
+            count++;
+        }
     }
 }
