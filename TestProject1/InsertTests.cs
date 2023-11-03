@@ -1,6 +1,6 @@
 using CustomList;
 
-namespace TestProject1
+namespace CustomListsTests
 {
     [TestClass]
     public class InsertTests
@@ -53,7 +53,7 @@ namespace TestProject1
         }
 
         [TestMethod]
-        public void Insert_ItemInsertedToListHasNegitiveIndex_ExceptionIsThrown()
+        public void Insert_MultipleItemsInsertedToList_CapacityIsProperlyIncreased()
         {
             //Arrange
             CustomList<int> list = new CustomList<int>();
@@ -62,11 +62,30 @@ namespace TestProject1
             list.Add(1);
             list.Add(2);
             list.Add(4);
-            list.Add(5);
+            list.Add(6);
+            list.Insert(2, 3);
+            list.Insert(4, 5);
 
             //Assert
-            //Assert.ThrowsException<ArgumentOutOfRangeException>(list.Insert(-2, 3));
+            Assert.AreEqual("1, 2, 3, 4, 5, 6", list.ToString());
         }
+
+
+        //[TestMethod]
+        //public void Insert_ItemInsertedToListHasNegitiveIndex_ExceptionIsThrown()
+        //{
+        //    //Arrange
+        //    CustomList<int> list = new CustomList<int>();
+
+        //    //Act
+        //    list.Add(1);
+        //    list.Add(2);
+        //    list.Add(4);
+        //    list.Add(5);
+
+        //    //Assert
+        //    Assert.ThrowsException<ArgumentOutOfRangeException>(list.Insert(-2, 3));
+        //}
 
 
 

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -40,21 +41,26 @@ namespace CustomList
                 yield return items[i];
             }
         }
-        public void Add(T item)
+
+        private void IncreaseCapacity()
         {
-            //'item' parameter should be added to internal 'items' array
-            //if items array is at capacity, double capacity and create new array
-            //transfer all items to new array
-            if (count == capacity) 
+            if (count == capacity)
             {
                 capacity *= 2;
-                T[]doubledItems = new T[capacity];
+                T[] doubledItems = new T[capacity];
                 for (int i = 0; i < count; i++)
                 {
                     doubledItems[i] = items[i];
                 }
                 items = doubledItems;
             }
+        }
+        public void Add(T item)
+        {
+            //'item' parameter should be added to internal 'items' array
+            //if items array is at capacity, double capacity and create new array
+            //transfer all items to new array
+            IncreaseCapacity();
             items[count] = item;
             count++;
         }
@@ -212,24 +218,43 @@ namespace CustomList
             {
                 throw new ArgumentOutOfRangeException();
             }
-            if (count == capacity)
-            {
-                capacity *= 2;
-                T[] doubledItems = new T[capacity];
-                for (int i = 0; i < count; i++)
-                {
-                    doubledItems[i] = items[i];
-                }
-                items = doubledItems;
-            }
+            IncreaseCapacity();
             T[] tempItems = new T[capacity];
-            tempItems = items;
+            items.CopyTo(tempItems, 0);
             for (int j = index; j < count; j++)
             {
                 items[j + 1] = tempItems[j];
             }
             items[index] = item;
             count++;
+        }
+
+        public void Sort()
+        {
+            var sorting = new CustomList<T>();
+            for(int i = 0; i < count; i++)
+            {
+                bool placed = false;
+                if (i == 0) { sorting.Add(items[i]); }
+                else
+                {
+                    foreach(T item in sorting)
+                    {
+                        if (Comparer.Default.Compare(items[i], item) < 0)
+                        {
+                            sorting.Insert(sorting.IndexOf(item), items[i]);
+                            placed = true;
+                            break;
+                        }
+                        
+                    }
+                    if (!placed)
+                    {
+                        sorting.Add(items[i]);
+                    }
+                }
+            }
+            items = sorting.items;
         }
     }
 }

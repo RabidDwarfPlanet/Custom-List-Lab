@@ -1,6 +1,6 @@
 ﻿using CustomList;
 
-namespace TestProject1
+namespace CustomListsTests
 {
     [TestClass]
     public class RemoveTests
