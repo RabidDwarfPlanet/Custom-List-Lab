@@ -174,9 +174,34 @@ namespace CustomList
 
         public bool Contains(T item) 
         {
-            foreach(T obj in items)
+            for(int i = 0; i < count; i++)
             {
-                if(EqualityComparer<T>.Default.Equals(obj, item))
+                if (EqualityComparer<T>.Default.Equals(items[i], item))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool Contains(T item, int startIndex)
+        {
+            for (int i = startIndex; i < count; i++)
+            {
+                if (EqualityComparer<T>.Default.Equals(items[i], item))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool Contains(T item, int startIndex, int endIndex)
+        {
+            for (int i = startIndex; i < count; i++)
+            {
+                if(i > endIndex) { return false; }
+                if (EqualityComparer<T>.Default.Equals(items[i], item))
                 {
                     return true;
                 }
@@ -196,6 +221,30 @@ namespace CustomList
             return -1;
         }
 
+        public int IndexOf(T item, int startIndex)
+        {
+            for (int i = startIndex; i < count; i++)
+            {
+                if (EqualityComparer<T>.Default.Equals(item, items[i]))
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        public int IndexOf(T item, int startIndex, int endIndex)
+        {
+            for (int i = startIndex; i < count; i++)
+            {
+                if(i > endIndex) { return -1; }
+                if (EqualityComparer<T>.Default.Equals(item, items[i]))
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
         public int LastIndexOf(T item)
         {
             int last = -1;
@@ -207,6 +256,100 @@ namespace CustomList
                 }
             }
             return last;
+        }
+
+        public int LastIndexOf(T item, int startIndex)
+        {
+            int last = -1;
+            for (int i = startIndex; i < count; i++)
+            {
+                if (EqualityComparer<T>.Default.Equals(item, items[i]))
+                {
+                    last = i;
+                }
+            }
+            return last;
+        }
+
+        public int LastIndexOf(T item, int startIndex, int endIndex)
+        {
+            int last = -1;
+            for (int i = startIndex; i < count; i++)
+            {
+                if(i > endIndex) { return last; }
+                if (EqualityComparer<T>.Default.Equals(item, items[i]))
+                {
+                    last = i;
+                }
+            }
+            return last;
+        }
+
+        public int[] AllIndexesOf(T item)
+        {
+            int length = 0;
+            int[] array = new int[length];
+            for (int i = 0; i < count; i++)
+            {
+                if (EqualityComparer<T>.Default.Equals(item, items[i]))
+                {
+                    length++;
+                    int[] newArray = new int[length];
+                    if(length == 1) { newArray[0] = i; }
+                    else 
+                    { 
+                        for (int j = 0; j < length - 1; j++) { newArray[j] = array[j]; }
+                        newArray[length - 1] = i;
+                    }
+                    array = newArray;
+                }
+            }
+            return array;
+        }
+
+        public int[] AllIndexesOf(T item, int startIndex)
+        {
+            int length = 0;
+            int[] array = new int[length];
+            for (int i = startIndex; i < count; i++)
+            {
+                if (EqualityComparer<T>.Default.Equals(item, items[i]))
+                {
+                    length++;
+                    int[] newArray = new int[length];
+                    if (length == 1) { newArray[0] = i; }
+                    else
+                    {
+                        for (int j = 0; j < length - 1; j++) { newArray[j] = array[j]; }
+                        newArray[length - 1] = i;
+                    }
+                    array = newArray;
+                }
+            }
+            return array;
+        }
+
+        public int[] AllIndexesOf(T item, int startIndex, int endIndex)
+        {
+            int length = 0;
+            int[] array = new int[length];
+            for (int i = startIndex; i < count; i++)
+            {
+                if(i > endIndex) { return array; }
+                if (EqualityComparer<T>.Default.Equals(item, items[i]))
+                {
+                    length++;
+                    int[] newArray = new int[length];
+                    if (length == 1) { newArray[0] = i; }
+                    else
+                    {
+                        for (int j = 0; j < length - 1; j++) { newArray[j] = array[j]; }
+                        newArray[length - 1] = i;
+                    }
+                    array = newArray;
+                }
+            }
+            return array;
         }
 
         public void TrimExcess()

@@ -51,6 +51,64 @@ namespace CustomListsTests
 
         }
 
+        [TestMethod]
+        public void IndexOf_MultipleInstancesOfItemAreInList_WhenOverloadedOnceReturnsFirstIndexAfterStartingIndex()
+        {
+            //Arrange
+            CustomList<int> list = new CustomList<int>();
+
+            //Act
+            list.Add(5);
+            list.Add(6);
+            list.Add(5);
+            list.Add(5);
+            list.Add(7);
+            list.Add(9);
+
+            //Assert
+            Assert.AreEqual(3, list.IndexOf(5, 3));
+
+        }
+
+        [TestMethod]
+        public void IndexOf_MultipleInstancesOfItemAreInList_WhenOverloadedTwiceReturnsFirstIndexWithinRange()
+        {
+            //Arrange
+            CustomList<int> list = new CustomList<int>();
+
+            //Act
+            list.Add(5);
+            list.Add(6);
+            list.Add(5);
+            list.Add(5);
+            list.Add(7);
+            list.Add(9);
+
+            //Assert
+            Assert.AreEqual(2, list.IndexOf(5, 1, 4));
+
+        }
+
+        [TestMethod]
+        public void IndexOf_MultipleInstancesOfItemAreInList_WhenOverloadedTwiceAndNoInstancesAreInRangeReturnsNegativeOne()
+        {
+            //Arrange
+            CustomList<int> list = new CustomList<int>();
+
+            //Act
+            list.Add(5);
+            list.Add(6);
+            list.Add(5);
+            list.Add(2);
+            list.Add(7);
+            list.Add(9);
+            list.Add(5);
+
+            //Assert
+            Assert.AreEqual(-1, list.IndexOf(5, 3, 5));
+
+        }
+
 
 
     }
