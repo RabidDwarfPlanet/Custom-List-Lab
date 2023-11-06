@@ -3,10 +3,10 @@ using CustomList;
 namespace CustomListsTests
 {
     [TestClass]
-    public class IndexOfTests
+    public class RemoveAtTests
     {
         [TestMethod]
-        public void IndexOf_ItemIsInList_MethodReturnsIndex()
+        public void RemoveAt_ItemsAreInList_CountDecreases()
         {
             //Arrange
             CustomList<int> list = new CustomList<int>();
@@ -14,14 +14,15 @@ namespace CustomListsTests
             //Act
             list.Add(5);
             list.Add(6);
+            list.RemoveAt(1);
 
             //Assert
-            Assert.AreEqual(1, list.IndexOf(6));
+            Assert.AreEqual(1, list.Count);
 
         }
 
         [TestMethod]
-        public void Contains_ItemIsInList_MethodReturnsNegitive1()
+        public void RemoveAt_ItemsAreInList_ItemInDefinedIndexIsRemoved()
         {
             //Arrange
             CustomList<int> list = new CustomList<int>();
@@ -29,14 +30,14 @@ namespace CustomListsTests
             //Act
             list.Add(5);
             list.Add(6);
+            list.RemoveAt(1);
 
             //Assert
-            Assert.AreEqual(-1, list.IndexOf(1));
-
+            Assert.AreEqual(0, list[1]);
         }
 
         [TestMethod]
-        public void Contains_MultipleInstancesOfItemAreInList_MethodReturnsFirstInstance()
+        public void RemoveAt_ItemsAreBehindRemovedInList_ItemsBehindRemovedItemMoveForward()
         {
             //Arrange
             CustomList<int> list = new CustomList<int>();
@@ -44,13 +45,12 @@ namespace CustomListsTests
             //Act
             list.Add(5);
             list.Add(6);
-            list.Add(5);
+            list.Add(7);
+            list.RemoveAt(1);
 
             //Assert
-            Assert.AreEqual(0, list.IndexOf(5));
-
+            Assert.AreEqual(7, list[1]);
         }
-
 
 
     }

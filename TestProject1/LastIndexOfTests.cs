@@ -3,40 +3,38 @@ using CustomList;
 namespace CustomListsTests
 {
     [TestClass]
-    public class IndexOfTests
+    public class LastIndexOfTests
     {
         [TestMethod]
-        public void IndexOf_ItemIsInList_MethodReturnsIndex()
+        public void LastIndexOf_ItemIsInList_MethodReturnsIndex()
         {
             //Arrange
             CustomList<int> list = new CustomList<int>();
 
             //Act
             list.Add(5);
-            list.Add(6);
 
             //Assert
-            Assert.AreEqual(1, list.IndexOf(6));
+            Assert.AreEqual(0, list.LastIndexOf(5));
 
         }
 
         [TestMethod]
-        public void Contains_ItemIsInList_MethodReturnsNegitive1()
+        public void LastIndexOf_ItemIsNotInList_MethodReturnsNegitive1()
         {
             //Arrange
             CustomList<int> list = new CustomList<int>();
 
             //Act
             list.Add(5);
-            list.Add(6);
 
             //Assert
-            Assert.AreEqual(-1, list.IndexOf(1));
+            Assert.AreEqual(-1, list.LastIndexOf(1));
 
         }
 
         [TestMethod]
-        public void Contains_MultipleInstancesOfItemAreInList_MethodReturnsFirstInstance()
+        public void LastIndexOf_MultipleInstancesOfItemAreInList_MethodReturnsLastInstancesIndex()
         {
             //Arrange
             CustomList<int> list = new CustomList<int>();
@@ -45,13 +43,12 @@ namespace CustomListsTests
             list.Add(5);
             list.Add(6);
             list.Add(5);
+            list.Add(5);
 
             //Assert
-            Assert.AreEqual(0, list.IndexOf(5));
+            Assert.AreEqual(3, list.LastIndexOf(5));
 
         }
-
-
 
     }
 }

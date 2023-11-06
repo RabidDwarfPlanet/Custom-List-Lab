@@ -77,7 +77,8 @@ namespace CustomList
                 {
                     for (int j = i; j < count; j++)
                     {
-                        if(j == Capacity - 1) { items[j] = default(T); }
+                        
+                        if(j == count - 1) { items[j] = default(T); }
                         else { items[j] = items[j + 1]; }
                     }
                     count--;
@@ -195,6 +196,19 @@ namespace CustomList
             return -1;
         }
 
+        public int LastIndexOf(T item)
+        {
+            int last = -1;
+            for (int i = 0; i < count; i++)
+            {
+                if (EqualityComparer<T>.Default.Equals(item, items[i]))
+                {
+                    last = i;
+                }
+            }
+            return last;
+        }
+
         public void TrimExcess()
         {
             if (capacity > 4)
@@ -229,6 +243,31 @@ namespace CustomList
             count++;
         }
 
+        public void RemoveAt(int index)
+        {
+            if (index < 0 || index > count)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            for (int j = index; j < count; j++)
+            {
+                if (j == Count - 1) { items[j] = default(T); }
+                else { items[j] = items[j + 1]; }
+            }
+            count--;
+        }
+
+        public void Reverse()
+        {
+            T[] reversed = new T[capacity];
+            int index = 0;
+            for(int i = count - 1; i >= 0; i--)
+            {
+                reversed[index] = items[i];
+                index++;
+            }
+            items = reversed;
+        }
         public void Sort()
         {
             var sorting = new CustomList<T>();
