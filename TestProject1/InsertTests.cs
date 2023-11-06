@@ -69,25 +69,5 @@ namespace CustomListsTests
             //Assert
             Assert.AreEqual("1, 2, 3, 4, 5, 6", list.ToString());
         }
-
-
-        //[TestMethod]
-        //public void Insert_ItemInsertedToListHasNegitiveIndex_ExceptionIsThrown()
-        //{
-        //    //Arrange
-        //    CustomList<int> list = new CustomList<int>();
-
-        //    //Act
-        //    list.Add(1);
-        //    list.Add(2);
-        //    list.Add(4);
-        //    list.Add(5);
-
-        //    //Assert
-        //    Assert.ThrowsException<ArgumentOutOfRangeException>(list.Insert(-2, 3));
-        //}
-
-
-
     }
 }

@@ -243,6 +243,16 @@ namespace CustomList
             count++;
         }
 
+        public T[] ToArray()
+        {
+            T[] array = new T[count];
+            for(int i = 0; i < count; i++)
+            {
+                array[i] = items[i];
+            }
+            return array;
+        }
+
         public void RemoveAt(int index)
         {
             if (index < 0 || index > count)
