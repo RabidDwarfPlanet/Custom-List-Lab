@@ -85,7 +85,7 @@ namespace CustomListsTests
             list.Add(9);
 
             //Assert
-            Assert.AreEqual(2, list.IndexOf(5, 1, 4));
+            Assert.AreEqual(2, list.IndexOf(5, 1, 3));
 
         }
 
@@ -105,7 +105,7 @@ namespace CustomListsTests
             list.Add(5);
 
             //Assert
-            Assert.AreEqual(-1, list.IndexOf(5, 3, 5));
+            Assert.AreEqual(-1, list.IndexOf(5, 3, 2));
 
         }
 

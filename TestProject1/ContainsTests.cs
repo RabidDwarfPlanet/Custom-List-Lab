@@ -87,7 +87,7 @@ namespace CustomListsTests
 
 
             //Assert
-            Assert.IsFalse(list.Contains(6, 1, 4));
+            Assert.IsFalse(list.Contains(6, 1, 3));
 
         }
 

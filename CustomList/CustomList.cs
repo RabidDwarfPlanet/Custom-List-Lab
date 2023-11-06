@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -196,11 +197,11 @@ namespace CustomList
             return false;
         }
 
-        public bool Contains(T item, int startIndex, int endIndex)
+        public bool Contains(T item, int startIndex, int range)
         {
             for (int i = startIndex; i < count; i++)
             {
-                if(i > endIndex) { return false; }
+                if(i > startIndex + range) { return false; }
                 if (EqualityComparer<T>.Default.Equals(items[i], item))
                 {
                     return true;
@@ -232,11 +233,11 @@ namespace CustomList
             }
             return -1;
         }
-        public int IndexOf(T item, int startIndex, int endIndex)
+        public int IndexOf(T item, int startIndex, int range)
         {
             for (int i = startIndex; i < count; i++)
             {
-                if(i > endIndex) { return -1; }
+                if(i > startIndex + range) { return -1; }
                 if (EqualityComparer<T>.Default.Equals(item, items[i]))
                 {
                     return i;
@@ -271,12 +272,12 @@ namespace CustomList
             return last;
         }
 
-        public int LastIndexOf(T item, int startIndex, int endIndex)
+        public int LastIndexOf(T item, int startIndex, int range)
         {
             int last = -1;
             for (int i = startIndex; i < count; i++)
             {
-                if(i > endIndex) { return last; }
+                if(i > startIndex + range) { return last; }
                 if (EqualityComparer<T>.Default.Equals(item, items[i]))
                 {
                     last = i;
@@ -329,13 +330,13 @@ namespace CustomList
             return array;
         }
 
-        public int[] AllIndexesOf(T item, int startIndex, int endIndex)
+        public int[] AllIndexesOf(T item, int startIndex, int range)
         {
             int length = 0;
             int[] array = new int[length];
             for (int i = startIndex; i < count; i++)
             {
-                if(i > endIndex) { return array; }
+                if(i > startIndex + range) { return array; }
                 if (EqualityComparer<T>.Default.Equals(item, items[i]))
                 {
                     length++;
@@ -402,12 +403,24 @@ namespace CustomList
             {
                 throw new ArgumentOutOfRangeException();
             }
-            for (int j = index; j < count; j++)
+            for (int i = index; i < count; i++)
             {
-                if (j == Count - 1) { items[j] = default(T); }
-                else { items[j] = items[j + 1]; }
+                if (i == Count - 1) { items[i] = default(T); }
+                else { items[i] = items[i + 1]; }
             }
             count--;
+        }
+
+        public void RemoveRange(int index, int range)
+        {
+            if (index < 0 || index > count || index + range > count || range < 0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            for (int i = 0; i < range; i++)
+            {
+                RemoveAt(index);
+            }
         }
 
         public void Reverse()
@@ -421,6 +434,7 @@ namespace CustomList
             }
             items = reversed;
         }
+
         public void Sort()
         {
             var sorting = new CustomList<T>();

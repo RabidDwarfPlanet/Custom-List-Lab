@@ -107,7 +107,7 @@ namespace CustomListsTests
             list.Add(2);
             list.Add(8);
             list.Add(8);
-            int[] array = list.AllIndexesOf(8, 1, 4);
+            int[] array = list.AllIndexesOf(8, 1, 3);
 
             //Assert
             Assert.AreEqual(2, array[0]);
